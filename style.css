@@ -1,0 +1,11 @@
+#tree_branch{
+    height: 50px;
+    width: 5px;
+    background-color: rgb(118, 92, 72);
+    position: absolute;
+    margin: auto;
+}
+
+#tree_container{
+    position: relative;
+}
