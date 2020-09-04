@@ -3,6 +3,7 @@
     width: 5px;
     background-color: rgb(118, 92, 72);
     position: absolute;
+    transform-origin: top left;
     margin: auto;
 }
 

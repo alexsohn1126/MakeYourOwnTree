@@ -1,10 +1,12 @@
-function tree_build(){
-    const depth = 5;
-    const rotdeg = 20;
+function tree_build(depth, rotdeg){
+    const tree_container = document.getElementById('tree_container');
+    while (tree_container.firstChild){
+        tree_container.removeChild(tree_container.lastChild);
+    }
 
-    var deglst = [[0]];
-    var root_left_pos = 0;
-    var root_top_pos = 0;
+    let deglst = [[0]];
+    let root_left_pos = 0;
+    let root_top_pos = 0;
     for (let i = 0; i < depth; i++){
         let new_lst = [];
         let closest_to_1_sin = Infinity;
@@ -35,8 +37,8 @@ function tree_build(){
             closest_to_1_sin * Math.PI) / 180) * 50));
     }
 
-    var leftlst = [[root_left_pos]];
-    var toplst = [[root_top_pos]];
+    let leftlst = [[root_left_pos]];
+    let toplst = [[root_top_pos]];
     for (let i = 0; i < deglst.length-1; i++){
         // left offset by sin(angle) * 50px
         // top offset by cos(angle) * 50px
@@ -51,7 +53,7 @@ function tree_build(){
         leftlst.push(new_leftlst);
         toplst.push(new_toplst);
     }
-
+    
     implement_tree(deglst, leftlst, toplst);
 }
 
@@ -60,15 +62,21 @@ function implement_tree(deglst, leftlst, toplst){
         for (let j=0; j<deglst[i].length; j++){
             const newDiv = document.createElement('div');
             newDiv.id = "tree_branch";
-            if (j % 2 == 0){
-                newDiv.style.transformOrigin = 'top left';
-            } else {
-                newDiv.style.transformOrigin = 'top right';
-            }
             newDiv.style.transform = 'rotate(' + deglst[i][j] + 'deg)';
             newDiv.style.left = leftlst[i][j] + 'px';
             newDiv.style.top = toplst[i][j] + 'px';
             document.getElementById("tree_container").appendChild(newDiv);
         }
     }
+}
+
+var depth_slider = document.getElementById('depth');
+var rotdeg_slider = document.getElementById('rotdeg');
+
+depth_slider.oninput = function () {
+    tree_build(parseInt(this.value), parseInt(rotdeg_slider.value));
+}
+
+rotdeg_slider.oninput = function () {
+    tree_build(parseInt(depth.value), parseInt(this.value));
 }

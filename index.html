@@ -4,8 +4,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <label for='depth'>Height (between 1 and 9 (inclusive))</label>
+    <input type='range' id='depth' name='depth' min='1' max='9' value='2'>
+    <br>
+    <label for='rotdeg'>Angle (between 10 and 30 (inclusive))</label>
+    <input type='range' id='rotdeg' name='rotdeg' min='10' max='30' value='20'>
     <p>
-    <button onclick="tree_build()">Build Tree</button>
+    <button onclick="tree_build(parseInt(document.getElementById('depth').value),
+    parseInt(document.getElementById('rotdeg').value))">Build Tree</button>
     </p>
     <div id="tree_container"></div>
     <script src="tree_script.js"> </script>
